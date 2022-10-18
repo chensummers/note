@@ -1,0 +1,37 @@
+<svg 
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    width="100%" height="100%" version="1.1" 
+>
+<!-- xmlns:xlink="http://www.w3.org/1999/xlink" 兼容一些浏览器不支持xlink -->
+    <!-- <g>
+        <rect x="0" y="0" width="50" height="30" style="fill: #ccc;"/>
+        <circle cx="40" cy="30" r="10" style="fill: #cfc; stroke: green;"/>
+        <circle cx="10" cy="30" r="10" style="fill: #cfc; stroke: green;"/>
+        <animateMotion 
+            from="0,0" to="150,0" 
+            dur="5s" fill="freeze"
+        />
+    </g> -->
+    <!-- <g>
+        <rect x="0" y="0" width="50" height="30" style="fill: #ccc;"/>
+        <circle cx="40" cy="30" r="10" style="fill: #cfc; stroke: green;"/>
+        <circle cx="10" cy="30" r="10" style="fill: #cfc; stroke: green;"/>
+        <animateMotion 
+            path="M0,25 C 70,25 150,100, 240, 0"
+            repeatCount="2"
+            dur="4s" fill="freeze"
+        />
+    </g> -->
+    <g>
+        <rect x="0" y="0" width="50" height="30" style="fill: #ccc;"/>
+        <circle cx="40" cy="30" r="10" style="fill: #cfc; stroke: green;"/>
+        <circle cx="10" cy="30" r="10" style="fill: #cfc; stroke: green;"/>
+        <animateMotion 
+            repeatCount="1" dur="4s" fill="freeze"
+        >
+            <mpath xlink:href="#cubicCurve" />
+        </animateMotion>
+    </g>
+    <path id="cubicCurve" d="M 0,0 C 50,25 100,60 240,50" fill="#333"/>
+</svg>

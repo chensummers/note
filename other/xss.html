@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>xss</title>
+    
+
+</head>
+<body>
+    <div id="div">
+        <input id="input"/>
+        <div id="content"></div>
+    </div>
+    <!-- <iframe src="https://www.baidu.com" style="width: 100px;height: 200px;"></iframe> -->
+    <script id="script"></script>
+    <script>
+        const content = document.querySelector('#content'),
+              input   = document.querySelector('#input');
+
+        input.onblur = function (e) {
+            console.log('/xss.html [18]--1',e.target.value);
+            content.innerHTML = e.target.value;
+        }
+        input.onfocus = function (e) {
+            console.log('/xss.html [26]--1','input-fous');
+        }
+        input.focus()
+        // document.addEventListener('DOMContentLoaded',(e)=>{
+        //     console.log('/xss.html [28]--1','e--dom--',e);
+        // })
+        console.log('/xss.html [29]--1','2323');
+        setTimeout(function() {
+            var scriptNode = document.getElementById("script");
+            document.body.removeChild(scriptNode)
+            console.log('/xss.html [32]--1','111',scriptNode);
+        }, 0);
+        console.log('/xss.html [35]--1','3444');
+        setTimeout(function() {
+            var scriptNode = document.getElementById("script");
+            console.log('2222',scriptNode);
+        }, 0);
+        console.log('/xss.html [40]--1','555');
+        let p = new Promise((res,rej)=>{
+            console.log('/xss.html [42]--1','promise');
+            rej('rej')
+            res('sd')
+        })
+        p.then(r=>{
+
+            console.log('/xss.html [47]--1','r',r);
+        }).catch(j=>{
+            console.log('/xss.html [50]--1','j',j);
+        })
+        console.log('/xss.html [52]--1','end');
+    </script>
+    
+</body>
+</html>

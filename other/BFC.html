@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>BFC</title>
+    <style>
+        .father {
+            width: 200px;
+            /* height: 200px; */
+            background: skyblue;
+        }
+        
+        .son {
+            width: 100px;
+            height: 100px;
+            background: red;
+            margin-top: 50px;
+        }
+        .bother1 {
+            width: 100px;
+            height: 100px;
+            background: skyblue;
+            margin-bottom: 60px;
+        }
+        
+        .bother2 {
+            width: 100px;
+            height: 100px;
+            background: cadetblue;
+            margin-top: 40px;
+        }
+        .wrapper, * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .left {
+            width: 300px;
+            height: 100px;
+            background: red;
+            float: left;
+        }
+
+        .right {
+            height: 200px;
+            background: skyblue;
+            /* overflow: hidden; */
+        }
+    </style>
+</head>
+<body>
+        <div class="father">
+            <span>11</span>
+            <div class="son"></div>
+        </div>
+        <div class="bother1"></div>
+        <div class="bother2"></div>
+        <div class="wrapper">
+            <div class="left">left</div>
+            <div class="right">right</div>
+        </div>
+</body>
+</html>

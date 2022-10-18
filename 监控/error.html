@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>error 监控</title>
+</head>
+
+<body>
+  <!-- <img src="http://localhost:8888/nottrue.jpg"> -->
+  <svg 
+    stroke="red"
+    fill="grey"
+    viewBox="-100 -100 600 600"
+  >
+    <circle cx="50" cy="50" r="40" />
+
+  </svg>
+  <script src="./error.js"></script>
+  <!-- <script async src="https://flowcloud-gateway-dev.xiaoxiangyoupin.cn/flow-api/payoutResultQuery"></script> -->
+  <script>
+    initResourceError()
+    initJsError()
+    initPromiseError()
+    initCorsError()
+    // Promise.resolve().then(() => console.log(c));
+  </script>
+
+</body>
+
+</html>

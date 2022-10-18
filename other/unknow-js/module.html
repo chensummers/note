@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>模块</title>
+</head>
+<body>
+  <script>
+    var MyModules = (
+      function Manager () {
+        var modules = {};
+        function define (name, deps, impl) {
+          for (var i=0; i<deps.length; i++) {
+            deps[i] = modules[deps[i]]
+          }
+          modules[name] = impl.apply(impl, deps)
+          console.log('/module.html [15]--1',name,deps,modules);
+        }
+        function get(name) {
+          return modules[name]
+        }
+
+        return {
+          define,
+          get,
+          modules
+        }
+      }
+    )()
+
+    MyModules.define('bar', [], function() {
+      function hello (who) {
+        return 'Let me intorduce:' + who
+      }
+      return {
+        hello
+      }
+    })
+    MyModules.define('foo', ['bar'], function(bar) {
+      var hungry = 'hippo';
+      function awesome() {
+        console.log(bar.hello(hungry).toUpperCase())
+      }
+      return {
+        awesome
+      }
+    })
+
+    var bar = MyModules.get('bar');
+    var foo = MyModules.get('foo')
+  </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>this</title>
+</head>
+<body>
+    <script>
+        let obj = {
+            a:1,
+            fn() {
+                console.log('/this.html [13]--1',this.a);
+            }
+        }
+        let a = obj.fn
+        a()
+
+        function s(s) {
+            return s.split('').reduce((a,b)=>a + b.charCodeAt(),0)
+        }
+
+        console.log('/this.html [23]--1','aa'>'ab',s('aa'),s('ab'));
+        console.log('/this.html [24]--1','a1'>'a2',s('a1'),s('a2'));
+        console.log('/this.html [25]--1','abc'>'abd',s('abc'),s('abd'));
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>严格模式</title>
+</head>
+<body>
+    <script>
+        'use strict'
+        // 1. a=1 必须声明之后才能赋值 
+        let b = {a:1}
+        // 2. delete b 不能使用 delete 字符删除变量或对象
+        // 函数参数名不能重复
+        // function d (a,a) {
+        //     console.log('/useStrict.html [21]--1',a);
+        // }
+        // d(1,1)
+        // 不允许使用八进制 010
+        // console.log('/useStrict.html [30]--1--',010);
+        // Uncaught SyntaxError: Unexpected eval or arguments in strict mode
+        // eval和 arguments 不能作为变量名 var arguments = 1
+        // 限制对调用栈的检测能力，访问 arguments.callee 会抛出异常
+        function aa() {
+            // console.log('/useStrict.html [38]--1--use-strict',this,arguments.callee);
+        }
+        // call、apply 传入 null undefined 保持原样不被转为window
+        aa.call(null)
+    </script>
+    <script>
+        a = 1
+        let c = {a:1}
+        delete c
+        console.log('/useStrict.html [14]--1',c);
+        function d (a,a) {
+            console.log('/useStrict.html [21]--1',a);
+        }
+        d(1,1)
+        // console.log('/useStrict.html [30]--1',010);
+        var arguments = 1
+        console.log('/useStrict.html [36]--1','arguments',arguments);
+        function aa() {
+            console.log('/useStrict.html [38]--1',this,arguments.callee);
+        }
+        aa.call(null)
+    </script>
+</body>
+</html>

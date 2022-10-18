@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Blob Test</title>
+  <script>
+    async function handleFile(e) {
+      var file = e.files[0];
+      console.log('/file.html [9]--1',file);
+      let _file = await getUploadImgSize(file)
+      console.log('/file.html [11]--1','_file',_file);
+      fileDataURL(file)
+    //   filBlob(file)
+    }
+    const fileDataURL = file => {
+        var fileReader = new FileReader();
+        var img = document.getElementsByTagName("img")[0];
+        fileReader.readAsDataURL(file);
+        fileReader.onload = function(e) {
+            console.log('/file.html [12]--1',e.target.result);
+            img.src = e.target.result;
+        }
+    }
+    const filBlob = file => {
+        var blob = URL.createObjectURL(file);
+        var img = document.getElementsByTagName("img")[0];
+        img.src = blob;
+        img.onload = function(e) {
+            console.log('/file.html [27]--1',this.src);
+            URL.revokeObjectURL(this.src); //释放createObjectURL创建得对象
+        }
+    }
+
+    function getUploadImgSize(file) {
+        return new Promise(resolve => {
+            const reader = new FileReader()
+            reader.readAsDataURL(file)
+            reader.onload = function(e) {
+            const result = e.target.result
+            const img = new Image()
+            img.src = result
+            img.onload = function(e) {
+                console.log('/file.html [12]--1',e.target.src);
+                resolve({
+                    width: img.width,
+                    height: img.height,
+                    img
+                })
+            }
+            }
+        })
+    }
+  </script>
+</head>
+ 
+<body> 
+  <input type="file"  onchange="handleFile(this)" />
+  </br>
+  <img style="width:200px;height:200px;">
+</body>
+  
+</html>

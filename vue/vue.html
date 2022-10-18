@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vue</title>
+  <!-- <script src="./vue2@2.7.2.10.js"></script> -->
+  <script src="./vue2@2.6.14.js"></script>
+  <style>
+    .span {
+      padding: 10px;
+      display: inline-block;
+      background-color: antiquewhite;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" :class="">
+    <!-- <keep-alive max="2" include="my-component,my-component-a,my-component-b">
+      <my-component v-if="isShowChild" ref="myCom">
+        <template #t>
+          <input>
+        </template>
+        <div>this is default slot</div>
+      </my-component>
+      <component :is="name"></component>
+    </keep-alive> -->
+    <!-- <div ref="nameRef">{{name}}=========>{{m}}===f{{f}}</div> -->
+    <span>{{name}}---{{f}}</span>
+    <span>sdsddd</span>
+    <!-- <div :class="['wrap',{actived:isShow}]" >
+      <div class="wrap-n">
+        <span class="span" v-for="i in n" :key="i" >{{i}}</span>
+      </div>
+      <button v-once @click="add">add</button>
+      <button @click="sub" v-once>sub</button>
+      <button @click="splice" v-once>splice</button>
+      <button @click="showChild" v-once>显示/隐藏</button>
+    </div> -->
+    <!-- <input v-model="name"/> -->
+    <!-- <button @click="name = 'my-component' ">my-component</button>
+    <button @click="name = 'my-component-a' ">my-component-a</button>
+    <button @click="name = 'my-component-b' ">my-component-b</button> -->
+  </div>
+  <!-- <script>
+    // const per = window.performance
+    // console.log('per==========>',per)
+    // import {ref} from 'vue'
+    // console.log(ref,'ref')
+    Vue.component('my-component-a',{
+      template:`<div>my-component-a: <input /></div>`
+    })
+    Vue.component('my-component-b', {
+      data() {
+        return {
+          b:'2222'
+        }
+      },
+      // beforeCreate() {
+      //   console.log('my-component-s==>beforeCreate')
+      // },
+      // created() {
+      //   console.log('my-component-s==>created')
+      // },
+      // beforeMount() {
+      //   console.log('my-component-s==>beforeMount')
+      // },
+      async mounted() {
+        // console.log('my-component1=====mounted===========',this)
+        // const nextT = await this.$nextTick(()=>{
+        //   console.log(this,'===============>this')
+        //   this.$destroy()
+        // })
+        // console.log(nextT,'next=======>')
+        // console.log('my-component-s==>mounted')
+      },
+      template:`<div>my-component-b: <input /></div>`
+    })
+    Vue.component('my-component', {
+      inject: ['a'],
+      data() {
+        return {
+          name: 'my-componentsdd'
+        }
+      },
+      
+      template: `
+        <div>
+          <input />
+          
+        </div>
+      `
+    })
+    // <slot name="t"></slot>
+    //       <slot />
+    //       <my-component-s><div>my-component-s1</div></my-component-s>
+    //       <my-component-s><div>my-component-s1</div></my-component-s>
+    //       <child-com></child-com>
+  </script> -->
+  <!-- <script>
+    function pluginxxx() {
+      return {
+        api(a) {
+          conosle.log(a,'pluginxxx')
+        }
+      }
+    }
+    Vue.use(pluginxxx)
+    const mixin = {
+      data() {
+        return {
+          mixin:'this is mix'
+        }
+      },
+      beforeCreate() {
+        // console.log('mixin============>beforeCreate')
+      },
+      created() {
+        // console.log('mixin============>created')
+      },
+      beforeMount() {
+        // console.log('mixin============>beforeMount')
+      },
+      mounted() {
+        // console.log(this)
+        // console.log('mixin====flux========>mounted')
+      },
+    }
+  </script> -->
+  <script>
+    const num = ()=> Math.ceil(Math.random()*1000+2)
+    const vue = new Vue({
+      el:'#app',
+      props: {
+        text: {
+          type: String,
+          default: ''
+        }
+      },
+      provide() {
+        return {
+          a:23
+        }
+      },
+      // mixins: [mixin],
+      data() {
+        return {
+          name: 'my-component',
+          n: [num(),num(),num()],
+          // n: [2,3,4],
+          isShowChild: true,
+          isShow: true
+        }
+      },
+      computed:{
+        f(){
+          return this.n.length *2
+        },
+      },
+      // watch: {
+      //   name:{
+      //     handler(n,o) {
+
+      //       // console.log('this is watcher',this.name,)
+      //     },
+      //     immediate: true
+      //   },
+      //   n(n,o) {
+      //     console.log('watch--------n',n)
+      //   }
+      // },
+      beforeCreate() {
+        // console.log('parent--beforeCreate=====',this)
+      },
+      created() {
+        // this.name = 22222
+        // console.log('parent--created=====',this)
+      },
+      beforeMount() {
+        console.log('parent--beforeMount=====',this)
+      },
+      mounted() {
+        // setTimeout(()=>{
+        //   this.name = 'sdfsfsf'
+        // },2000)
+        // console.log('this.$pluginxxx======>',this.pluginxxx)
+        console.log('parent--mounted=====',this)
+      },
+      // beforeUpdate() {
+      //   console.log('parent--beforeUpdate=====',this)
+      // },
+      // updated() {
+      //   console.log('parent--updated=====',this)
+      // },
+      // beforeDestroy() {
+      //   console.log('parent--beforeDestroy=====',this)
+      // },
+      // destroyed() {
+      //   console.log('parent--destroyed=====',this)
+      // },
+      // activated() {
+      //   console.log('parent--activated=====',this)
+      // },
+      // renderTracked(a) {
+      //   // console.log('renderTracked=====',a)
+      // },
+      // renderTriggered(b) {
+      //   console.log('parent--renderTriggered=====',b)
+      // },
+      // serverPrefetch() {
+      //   console.log('parent--serverPrefetch=====',this)
+      // },
+      methods:{
+        add() {
+          this.n.push(num())
+        },
+        sub() {
+          this.n.pop()
+        },
+        splice() {
+          this.n.splice(1,1)
+          // this.m = this.m
+          
+          console.log('this.n',this.m)
+        },
+        showChild() {
+          this.isShowChild = !this.isShowChild
+          
+          // console.log('per=--------',per)
+        }
+        
+      }
+    })
+  </script>
+  <script>
+    function chartStr(str) {
+      let obj={},objKey={},arr=[],_arr=str.split('');
+      _arr.map(s=>{
+        if(arr.includes(s)) {
+          obj[s]++
+        }else {
+          obj[s] = 1
+          arr.push(s)
+        }
+      })
+      // 从大到小排列
+      let num = Object.values(obj).sort()
+      let min = num[0],max=num.slice(-1)[0],minS=[],maxS=[];
+      for(let key in obj) {
+        let _i = obj[key]
+        if(objKey[_i]) {
+          objKey[_i].push(key)
+        }else {
+          objKey[_i] = [key]
+        }
+      }
+      return {
+        min,
+        max,
+        objKey,
+        minS: objKey[min],
+        maxS: objKey[max],
+        objNum: obj,
+        origin: str
+      }
+    }
+
+    function characte(str) {
+      if(!str) return null
+      let obj={},objKey={},arr=str.split('').sort().join('').match(/(\w)\1*/g).sort((a,b)=>a.length-b.length),len=arr.length;
+      let minS=[],min=arr[0].length,maxS=[],max=arr[0].length;
+      arr.map(s=>{
+        let num = s.length, c = s.slice(0,1);
+        obj[c] = num
+        if(objKey[num]) {
+          objKey[num].push(c)
+        }else {
+          objKey[num] = [c]
+        }
+        
+        if(num>=max) max = num
+        if(num<=min) min = num
+      })
+      
+      return {
+        min,
+        max,
+        objKey,
+        minS: objKey[min],
+        maxS: objKey[max],
+        objNum: obj,
+        origin: str
+      }
+    }
+    // let obj1 = chartStr('nqsdfsdfaaadsdwwqeeqwssd')
+    // let obj2 = characte('nqsdfsdfaaadsdwwqeeqwssd')
+  </script>
+</body>
+</html>

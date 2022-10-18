@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>函数防抖节流</title>
+</head>
+<body>
+    <input/>
+    <script>
+        let input = document.querySelector('input')
+
+        // input.oninput = debounce((e)=>{
+        //     console.log('/函数防抖节流.html [14]--1',e.target.value);
+        // },1000)
+
+        // input.oninput = throttleTimeout((e)=>{
+        //     console.log('/函数防抖节流.html [14]--1',e.target.value);
+        // },1000)
+
+        input.oninput = throttleTimestamp((e)=>{
+            console.log('/函数防抖节流.html [14]--1',e.target.value);
+        })
+
+        function debounce(fn,t=500,immediate) {
+            let timer = null;
+            return function() {
+                console.log('/函数防抖节流.html [19]--1',timer);
+                if(timer) {
+                    clearTimeout(timer)
+                    timer = null;
+                }
+                
+                timer = setTimeout(()=>{
+                    fn.apply(this,arguments)
+                    timer = null;
+                    clearTimeout(timer)
+                },t)
+                
+            }
+        }
+
+        function throttleTimeout (fn,t) {
+            let timer = null;
+            return function () {
+                if(!timer) {
+                    timer = setTimeout(()=>{
+                        fn.apply(this,arguments)
+                        timer = null;
+                        clearTimeout(timer)
+                    },t)
+                }
+            }
+        }
+
+        function throttleTimestamp (fn,delay=500) {
+            let pre = Date.now()
+            return function () {
+                let cur = Date.now()
+                if(cur - pre > delay) {
+                    fn.apply(this,arguments)
+                    pre = cur
+                }
+            }
+        }
+    </script>
+    <script>
+        for(var i=0;i<5;i++) {
+            for(var i=0;i<5;i++) {
+                console.log('inner',i)
+            }
+            console.log('out',i)
+        }
+        for(let i=0;i<5;i++) {
+            for(let i=0;i<5;i++) {
+                console.log('inner',i)
+            }
+            console.log('out',i)
+        }
+
+
+        int main(){
+            struct info {
+                char *name;  
+                int age;
+            } foo;
+
+            foo.name = "Foo";
+            foo.age = 18;
+
+            return 0;
+        }
+
+        // 0000000100000f90 _main:
+        // 100000f90: 55                           pushq   %rbp
+        // 100000f91: 48 89 e5                     movq    %rsp, %rbp
+        // 100000f94: 31 c0                        xorl    %eax, %eax
+        // 100000f96: c7 45 fc 00 00 00 00         movl    $0, -4(%rbp)
+        // 100000f9d: 48 8d 0d 0d 00 00 00         leaq    13(%rip), %rcx
+        // 100000fa4: 48 89 4d e8                  movq    %rcx, -24(%rbp)
+        // 100000fa8: c7 45 f0 12 00 00 00         movl    $18, -16(%rbp)
+        // 100000faf: 5d                           popq    %rbp
+        // 100000fb0: c3                           retq
+    </script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>垂直居中</title>
+    <style>
+        .wrap1 {
+            display: flex;
+            display: none;
+        }
+        .div{
+            flex: 0 0 400px;
+            background: #333;
+            margin-left: 20px;
+            width: 400px;
+            height: 400px;
+            overflow: hidden;
+        }
+        span{
+            background-color: aquamarine;
+            padding: 20px;
+            display: inline-block;
+        }
+        .div1{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .div2 {
+            position: relative;
+        }
+        .div2 span{
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            width: 100px;
+            height: 100px;
+        }
+        .div3 {
+            position: relative;
+        }
+        .div3 span{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            /* width: 100px;
+            height: 100px; */
+            transform: translate(-50%,-50%);
+        }
+        .div4 {
+            display: grid;
+            align-items: center;
+            justify-content: center;
+        }
+        .wrap2 {
+            display: flex;
+            display: none;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            height: 500px;
+            border: 1px solid #ccc;
+            align-content: space-around;
+        }
+        .wrap2 div{
+            background-color: antiquewhite;
+            flex: 0 0 30%;
+            height: 30%;
+            /* margin-bottom: 20px; */
+        }
+        .order1 {
+            /* order: -1; */
+        }
+        .wrap3 {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 0;
+            border: 1px solid #ccc;
+        }
+        .wrap3 div {
+            height: 200px;
+            background-color: aqua;
+        }
+        .wrap3 div:not(.wrap3-2) {
+            flex: 0 0 200px;
+
+        }
+        .wrap3-2 {
+            flex-grow: 1;
+            margin: 0 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap1">
+        <div class=" div div1">
+            <span>flex</span>
+        </div>
+        <div class=" div div2">
+            <span>定位+margin+需要添加width,height</span>
+        </div>
+        <div class=" div div3">
+            <span>定位+transform</span>
+        </div>
+        <div class=" div div4">
+            <span>grid 栅格布局</span>
+        </div>
+        <div class=" div div5">
+            <span>flex</span>
+        </div>
+    </div>
+    <div class="wrap2">
+        <div >1</div>
+        <div>2</div>
+        <div>3</div>
+        <div class="order1">4</div>
+        <div>5</div>
+        <div>6</div>
+        <div>7</div>
+    </div>
+    <div class="wrap3">
+        <div>1</div>
+        <div class="wrap3-2">1</div>
+        <div>1</div>
+    </div>
+</body>
+</html>

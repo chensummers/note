@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>flex</title>
+    <style>
+        .flex {
+            border: 1px solid;
+            width: 80%;
+            height: 700px;
+            display: flex;
+            /* flex-wrap: wrap; */
+        }
+
+        .children {
+            background: red;
+            /* height: 100px; */
+        }
+        .item {
+            /* flex: 1; */
+            background: #333;
+        }
+        .flex span {
+            width: 200px;
+            /* height: 100px; */
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 20px 20px;
+        }
+        .grid-item {
+            background-color:aqua;
+            text-align: center;
+            
+        }
+        .grid-item:nth-child(odd) {
+            background-color:bisque;
+        }
+    </style>
+</head>
+<body>
+    <div class="flex">
+        <span class="children">1</span>
+        <span class="item"></span>
+        <span class="children">2</span>
+        <span class="item"></span>
+        <span class="children">3</span>
+        <span class="item"></span>
+        <span class="children">4</span>
+        <span class="item"></span>
+    </div>
+
+    <div class="grid">
+        <span class="grid-item">1</span>
+        <span class="grid-item">2</span>
+        <span class="grid-item">3</span>
+        <span class="grid-item">4</span>
+        <span class="grid-item">5</span>
+        <span class="grid-item">6</span>
+        <span class="grid-item">7</span>
+        <span class="grid-item">8</span>
+    </div>
+</body>
+</html>

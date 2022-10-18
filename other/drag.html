@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>testEvents</title>
+    <style type="text/css">
+        .source{
+            width: 50px;
+            height: 50px;
+            border: 1px solid red;
+        }
+        .process{
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            margin-top: 10px;
+        }
+        .dest{
+            width: 100px;
+            height: 100px;
+            border: 1px solid green;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="source" id="source" draggable="true">source</div>
+    <div class="process" id="process">process</div>
+    <div class="dest" id="dest">dest</div>
+    <script type="text/javascript">
+    window.onload=function(){
+        var source = document.getElementById("source");
+        var process = document.getElementById("process");
+        var dest = document.getElementById("dest");
+        var sourceEle;
+
+        source.addEventListener("dragstart",function(e){
+            console.log("source dragstart");
+            console.log(e);
+            sourceEle = e.target;
+            var dt = e.dataTransfer;
+            dt.effectedAllowed = "all";
+        },false);
+
+        process.addEventListener("dragenter",function(e){
+            console.log("process dragenter");
+            console.log(e);
+        },false);
+
+        process.addEventListener("dragover",function(e){
+            console.log("process dragover");
+            console.log(e);
+        },false);
+
+        process.addEventListener("dragleave",function(e){
+            console.log("process dragleave");
+            console.log(e);
+        },false);
+
+        source.addEventListener("drag",function(e){
+            console.log("source drag");
+            console.log(e);
+        },false);
+
+        dest.addEventListener("dragend",function(e){
+            console.log("dest dragend");
+            console.log(e);
+            e.preventDefault();
+        },false);
+
+        dest.addEventListener("drop",function(e){
+            console.log("dest drop");
+            console.log(e);
+            dest.appendChild(sourceEle);
+            e.preventDefault();
+            e.stopPropagation();
+        },false);
+
+        document.ondragover = function(e){e.preventDefault();}
+        document.ondrop = function(e){e.preventDefault();}
+    }
+    </script>
+</body>
+</html>

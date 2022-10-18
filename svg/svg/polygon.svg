@@ -1,0 +1,30 @@
+<svg width="100%" height="100%" version="1.1"
+xmlns="http://www.w3.org/2000/svg">
+    <!-- 四边形 -->
+    <!-- <polygon 
+        points="2,40 10,10 40,40 10,50"
+        style="fill:#cccccc;stroke:#000000;stroke-width:1"
+    /> -->
+    <!-- 三角形 -->
+    <!-- <polygon 
+        points="20,20 70,20  45,50"
+        style="fill:#cccccc;stroke:#000000;stroke-width:1"
+    /> -->
+    <!-- 直角三角形 -->
+    <!-- <polygon 
+        points="20,20 20,50 50,50"
+        style="fill:#cccccc;stroke:#000000;stroke-width:1"
+    /> -->
+    <!-- <polygon 
+        points="20,20 50,20 50,50"
+        style="fill:#cccccc;stroke:#000000;stroke-width:1"
+    /> -->
+    <!-- <polygon 
+        points="50,20 20,50 20,20"
+        style="fill:#cccccc;stroke:#000000;stroke-width:1;"
+    /> -->
+    <polygon 
+        points="50,20 20,50 50,50"
+        style="fill:#cccccc;stroke:#000000;stroke-width:1;"
+    />
+</svg>

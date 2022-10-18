@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>shadow dom</title>
+    <style>
+        span{
+            color: red;
+        }
+    </style>
+    <style id="shadow-style1">
+        .title {
+                position: relative;
+                font-size: 0.8rem;
+                cursor: pointer;
+            }
+            .info {
+                font-size: 0.8rem;
+                width: 200px;
+                display: inline-block;
+                border: 1px solid black;
+                padding: 10px;
+                background: white;
+                border-radius: 10px;
+                /* opacity: 0; */
+                transition: 0.6s all;
+                position: absolute;
+                z-index: 3;
+                visibility:hidden;
+            }
+
+            .title:hover  .info{
+                /* opacity: 1; */
+                visibility: visible;
+            }
+    </style>
+    <style id="shadow-style2">
+            .title {
+                    position: relative;
+                    font-size: 0.8rem;
+                    cursor: pointer;
+                }
+                .info {
+                    font-size: 0.8rem;
+                    width: 200px;
+                    display: inline-block;
+                    border: 1px solid black;
+                    padding: 10px;
+                    background: white;
+                    border-radius: 10px;
+                    /* opacity: 0; */
+                    transition: 0.6s all;
+                    position: absolute;
+                    z-index: 3;
+                    visibility:hidden;
+                }
+    
+                .title:hover  .info{
+                    /* opacity: 1; */
+                    visibility: visible;
+                }
+        </style>
+</head>
+<body>
+    <div>
+        <popup-info title="shadow DOM" text="通过继承 HTMLElement 来创建构造方法">
+    </div>
+    <div id="shadow" title="this is a shadow DOM!" text="直接在dom上添加shadow DOM "></div>
+    <span>this is common DOM</span>
+    <script>
+
+         // 为 shadow DOM 添加一些 CSS 样式
+        const style1 = document.getElementById('shadow-style1');
+        const style2 = document.getElementById('shadow-style2');
+        function createShadowDom () {
+            // 直接在dom上添加shadow
+            const shadowRoot = document.getElementById('shadow');
+            const shadow1 = shadowRoot.attachShadow({mode:'open'});
+    
+            const span = document.createElement('span');
+            span.className = 'title'
+            span.textContent = shadowRoot.getAttribute('title')||'shadow DOM';
+            const infoSpan = document.createElement('span')
+            infoSpan.className = 'info'
+            infoSpan.textContent = shadowRoot.getAttribute('text')||'shadow DOM';
+            
+            shadow1.appendChild(style1)
+            shadow1.appendChild(span)
+            span.appendChild(infoSpan)
+        }
+        
+        createShadowDom()
+
+        // 通过继承 HTMLElement 来创建构造方法
+        class PopUpInfo extends HTMLElement {
+            constructor() {
+                // 必须首先调用 super方法
+                super();
+                // 创建 shadow root
+                const shadow = this.attachShadow({mode: 'open'});
+
+                // 创建子节点
+                const titleSpan = document.createElement('span');
+                titleSpan.className="title"
+                titleSpan.textContent = this.getAttribute('title')||'Class shadow'
+
+                // 获取属性的内容并将内容添加到 info 元素内
+                const infoSpan = document.createElement('span');
+                infoSpan.setAttribute('class','info');
+                const text = this.getAttribute('text');
+                infoSpan.textContent = text;
+
+                // 将所创建的元素添加到 Shadow DOM 上
+                shadow.appendChild(style2);
+                shadow.appendChild(titleSpan);
+                titleSpan.appendChild(infoSpan)
+            }
+        }
+
+        // 定义新的元素
+        customElements.define('popup-info', PopUpInfo);
+    </script>
+</body>
+</html>

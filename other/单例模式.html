@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>单例模式</title>
+</head>
+
+<body>
+    <script>
+        const SingleFn = (function () {
+            let instance = null;
+
+            function single() {
+                this.name = 'single'
+
+                return {
+                    type: 'function',
+                    singleMethod() {
+                        console.log('/单例模式.html [19]--1', this.type);
+                    }
+                }
+            }
+
+            return function () {
+                return instance || (instance = new single())
+            }
+
+        })()
+
+        a = new SingleFn()
+        b = new SingleFn()
+        console.log('/单例模式.html [29]--1', SingleFn, a, a === b);
+
+        let mySingleton = (() => {
+            let instance;
+
+            let init = () => {
+                let privateMethod = () => { //私有方法
+                    console.log('I am privateMethod');
+                }
+
+                let privateVariable = 'I am also private';
+                let privateRandomNumber = Math.random();
+
+                return { //共有方法和变量
+                    publicMethod: () => {
+                        console.log('I am public');
+                    },
+                    publicProperty: 'I am also public',
+                    getRandomNumber: () => {
+                        return privateRandomNumber;
+                    }
+                }
+            }
+
+            return { //获取Singleton的实例，如果存在就返回，不存在就创建新实例
+                getInstance: () => {
+                    if (!instance) {
+                        instance = init();
+                    }
+
+                    return instance;
+                }
+            }
+
+        })();
+
+        let singleA = mySingleton.getInstance();
+        let singleB = mySingleton.getInstance();
+
+        console.log(singleA.getRandomNumber() === singleB.getRandomNumber()); //ture
+
+        class Dog {
+            constructor(name) {
+                this.name = name;
+                console.log('/单例模式.html [78]--1',this.name);
+            }
+            static getInstance(name) {
+                if(!this.instance) {
+                    this.instance = new Dog(name);
+                }
+                return this.instance;
+            }
+        }
+
+        d1 = new Dog('d1')
+        d2 = new Dog('d2')
+        d3 = Dog.getInstance('dd')
+        d4 = Dog.getInstance('dd44')
+        console.log('/单例模式.html [90]--1',d1===d2,d3===d4);
+    </script>
+</body>
+
+</html>

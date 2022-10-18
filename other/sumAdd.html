@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>add</title>
+</head>
+<body>
+    <script>
+        function add(a, b) {
+            const maxLen = Math.max(
+                a.toString().split(".")[1].length,
+                b.toString().split(".")[1].length
+            );
+            
+            const base = 10 ** maxLen;
+            const bigA = base*a;
+            const bigB = base*b;
+            const bigRes = (bigA + bigB) / base;
+            
+            return bigRes;
+        }
+        function addSum() {
+
+            if(arguments.length===0) return 0;
+            const nums = [...arguments],
+                  maxLen = Math.max(
+                        ...nums.map(n=>{
+                            let fit = n.toString().split('.')[1]
+                            return fit ? fit.length:0
+                        })
+                    ),
+                    base = 10 ** maxLen,
+                    sum = nums.reduce((pre,cur)=>pre+cur*base,0)/base;
+            
+            return sum;
+        }
+    </script>
+</body>
+</html>

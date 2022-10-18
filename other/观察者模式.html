@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>观察者模式</title>
+</head>
+<body>
+    <script>
+        class Publish {
+            constructor(type) {
+                this.observers = []
+                this.titles = []
+                this.type = type
+            }
+            // 添加发布文章方法
+            pubTitles(title=[]) {
+                this.titles = [...this.titles,...title]
+                this.notifys()
+                console.log(`${this.type} 发布了 ${this.titles.join()}`);
+            }
+            // 添加订阅者
+            add(observer) {
+                if(this.observers.includes(observer)) {
+                    console.log('/观察者模式.html [24]--1','您已订阅了');
+                }else {
+                    this.observers.push(observer)
+                    this.notify(observer)
+                }
+            }
+            // 通知单个订阅者
+            notify(observer) {
+                observer && observer.update(this.type,this.titles)
+            }
+            // 通知所有订阅者
+            notifys() {
+                this.observers.map(observer=>observer.update(this.type,this.titles))
+            }
+        }
+
+        class Observer {
+            constructor(name) {
+                this.info = {
+                    name
+                }
+            }
+            update(type,titles=[]) {
+                (this.info.titles = (this.info.titles||[])).push(...titles);
+                (this.info.types = (this.info.types||[])).push(type);
+                console.log(`${this.info.name} 订阅了 [${type}] ${titles.join()}`);
+            }
+            showInfo(){
+                console.log('/观察者模式.html [58]--1',this.info);
+            }
+        }
+
+        // // 发布者
+        // const Webpublish = new Publish('Web');
+        // const Articalpublish = new Publish('Artical');
+
+        // // // 订阅者
+        // const observer1 = new Observer('observer1');
+        // const observer2 = new Observer('observer2');
+        // const observer3 = new Observer('observer3');
+        
+        // Webpublish.pubTitles(['JS','NODE','VUE'])
+        // Articalpublish.pubTitles(['知乎','掘金'])
+
+        // Webpublish.add(observer1)
+        // Webpublish.add(observer2)
+
+        // Articalpublish.add(observer1)
+        // Articalpublish.add(observer3)
+    </script>
+    <script>
+        class   Publish1 {
+            constructor () {
+                this.executes = {}
+            }
+            // 订阅
+            on(type,fn) {
+                (this.executes[type]|| (this.executes[type]=[])).push(fn)
+            }
+            // 发布
+            emit(type,args) {
+                let _this = this;
+                if(!this.executes[type]) {
+                    console.log('/观察者模式.html [86]--1','未订阅该事件');
+                    return;
+                }
+                const fns = this.executes[type];
+                fns.map(f=>{
+                    f.call(_this,args)
+                    // f(args)
+                })
+            }
+            once(type,fn) {
+                function on () {
+                    this.off(type,on)
+                    fn()
+                }
+                on.fn = fn
+                this.on(type,on)
+            }
+            off(type,fn) {
+                // 未传fn，时，置空该订阅事件
+                if(!fn) {
+                    this.executes[type] = null
+                    return;
+                }
+                const fns = this.executes[type];
+                if(!fns) return;
+
+                let cb;
+                for(let i=0,len=fns.length;i<len;i++) {
+                    cb = fns[i];
+                    if(cb===fn||cb.fn===fn) {
+                        fns.splice(i,1)
+                        break;
+                    }
+                }
+                
+            }
+        }
+
+        let p = new Publish1()
+        
+        p.on('event1',(arg)=>{
+            console.log('/观察者模式.html [101]--1','arg',arg);
+        })
+        p.on('event2',(arg)=>{
+            console.log('/观察者模式.html [101]--1','arg',arg);
+        })
+
+        const f3 = (arg) =>{
+            console.log('/观察者模式.html [136]--1','arg',arg);
+        }
+        // p.once('event3',(arg)=>{
+        //     console.log('/观察者模式.html [137]--1','once1',arg);
+        // })
+        // p.once('event3',(arg)=>{
+        //     console.log('/观察者模式.html [137]--1','once2',arg);
+        // })
+
+        p.once('event3',f3)
+        p.once('event3',f3)
+
+        p.emit('event1','one')
+        p.emit('event1','one1')
+        p.emit('event2','one2')
+
+        p.emit('event3','one333')
+
+
+        // setTimeout(() => {
+        //     p.emit('event1','one3')
+        // }, 1000);
+        // setTimeout(() => {
+        //     p.emit('event1','one4')
+        // }, 2000);
+        
+        console.log('/观察者模式.html [157]--1',p.executes);
+    </script>
+</body>
+</html>

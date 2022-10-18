@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>promise</title>
+</head>
+<body>
+    <script>
+        console.log('/promise.html [10]--1','start');
+        function timer (fn,t=1000) {
+            return (arg)=>{
+                let _t = setTimeout(()=>{
+                    fn&&fn(arg)
+                    console.log('/promise.html [13]--1','arg',arg);
+                    clearTimeout(_t);
+                    _t=null;
+                },t)
+            }
+        }
+        const p1 = new Promise((res,rej)=>{
+            // timer(res)('p1')
+            // let _t = setTimeout(()=>{
+            //     // res('p1')
+            //     rej('p1')
+            //     console.log('arg1');
+            //     clearTimeout(_t);
+            //     _t=null;
+            // },1000)
+            res('p1')
+        })
+        const p2 = new Promise((res,rej)=>{
+            // timer(res,2000)('p2')
+            // let _t = setTimeout(()=>{
+            //     // res('p2')
+            //     res('p2')
+            //     console.log('arg2');
+            //     clearTimeout(_t);
+            //     _t=null;
+            // },2000)
+            res('p2')
+        })
+        const p3 = new Promise((res,rej)=>{
+            // timer(res,3000)('p3')
+            // let _t = setTimeout(()=>{
+            //     // res('p3')
+            //     res('p3')
+            //     console.log('arg3');
+            //     clearTimeout(_t);
+            //     _t=null;
+            // },1000)
+            res('p3')
+        })  
+        const p4 = new Promise((res,rej)=>{
+            // timer(rej,4000)('p4')
+            // let _t = setTimeout(()=>{
+            //     // res('p4')
+            //     res('p4')
+            //     console.log('arg4');
+            //     clearTimeout(_t);
+            //     _t=null;
+            // },3000)
+            res('p4')
+        })
+
+        // p1-p4 都fulfilled then 返回结果数组
+        // p1-p4 只要有一个rejected 返回第一个rejected的值
+        // Promise.all([p1,p2,p3,p4]).then(res=>{
+        //     console.log('/promise.html [40]--1-all-then',res);
+        // }).catch(r=>{
+        //     console.log('/promise.html [43]--1-all-catch','r',r);
+        // })
+        
+        // p1-p4 只要有一个确定状态，就返回改状态
+        // Promise.race([p1,p2,p3,p4]).then(res=>{
+        //     console.log('/promise.html [46]--1--race-then',res);
+        // }).catch(r=>{
+        //     console.log('/promise.html [48]--1--race-catch','r',r);
+        // })
+
+        // p1-p4 返回所有状态数组，没有catch
+        // Promise.allSettled([p1,p2,p3,p4]).then(res=>{
+        //     console.log('/promise.html [51]--1--allSettled-then',res);
+        // }).catch(r=>{
+        //     console.log('/promise.html [54]--1--allSettled-catch','r',r);
+        // })
+        
+        // p1-p4 只要有一个状态fulfilled 就返回，如果都rejected,在catch中返回
+        // Promise.any([p1,p2,p3,p4]).then(res=>{
+        //     console.log('/promise.html [58]--1--any-then',res);
+        // }).catch(r=>{
+        //     console.log('/promise.html [60]--1--any-catch','r',r);
+        // })
+        console.log('/promise.html [57]--1','end');
+    </script>
+</body>
+</html>

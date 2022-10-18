@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>工厂设计模式</title>
+</head>
+<body>
+    <script>
+          //Car构造函数
+  function Car(option) {
+    this.doors = option.doors || 4
+    this.color = option.color || 'red'
+    this.state = option.state || 'brand new'
+  }
+
+  //Truck构造函数
+  function Truck(option) {
+    this.color = option.color || 'blue'
+    this.wheelSize = option.wheelSize || 'large'
+    this.state = option.state || 'used'
+  }
+
+  //Vehicle工厂
+  function VehicleFactory() {}
+
+  VehicleFactory.prototype.vehicleClass = Car
+  VehicleFactory.prototype.createVehicle = function(option) {
+    if(option.vehicleType === 'car') {
+      this.vehicleClass = Car
+    }
+    if(option.vehicleType === 'truck') {
+      this.vehicleClass = Truck
+    }
+
+    return new this.vehicleClass(option)
+  }
+
+  //创建生成汽车的工厂实例
+  var carFactory = new VehicleFactory()
+  var car = carFactory.createVehicle({
+    // vehicleType: 'car',
+    color: 'yellow',
+    doors: 6
+  })
+
+  console.log(car instanceof Car)
+  console.log(carFactory instanceof VehicleFactory,'VehicleFactory')
+  console.log(car)
+  //true
+  //Car {doors: 6, color: "yellow", state: "brand new"}
+
+  var movingTruck = carFactory.createVehicle({
+    vehicleType: 'truck',
+    color: 'red',
+    state: 'like new',
+    wheelSize: 'small'
+  })
+
+  console.log(movingTruck instanceof Truck)
+  console.log(movingTruck)
+  //true
+  //Truck {color: "red", state: "like new", wheelSize: "small"}    
+    </script>
+</body>
+</html>

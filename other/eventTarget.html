@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+    <head>
+        <style>
+         ul {
+            border: 1px solid red;
+            padding: 2px;
+         }
+        </style>
+        
+    </head>
+    <body id="body">
+        <div id="div">
+            <span id="span">ddddd</span>
+        </div>
+        
+        <script>
+            function onBody (e) {
+                console.log('/target.html [18]--1','body');
+                // e.stopPropagation()
+                // e.preventDefault()
+            }
+            function onDiv (e) {
+                console.log('/target.html [18]--1','div');
+            }
+            function onSpan (e) {
+                console.log('/target.html [18]--1','span',e);
+                e.stopPropagation()
+                // e.preventDefault()
+            }
+            window.onload = function() {
+                const body = document.getElementById('body')
+                const div = document.getElementById('div')
+                const span = document.getElementById('span')
+
+                body.addEventListener('click',onBody, true);
+                div.addEventListener('click',onDiv,!false);
+                span.addEventListener('click',onSpan,!false);
+
+            }
+        </script>
+    </body>
+    </html>
