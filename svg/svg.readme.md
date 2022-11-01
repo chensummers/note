@@ -1,5 +1,6 @@
 # 组成元素
 >- w3c文档 <https://www.w3cschool.cn/svg/svg-tutorial.html>
+>- MDN文档 <https://developer.mozilla.org/en-US/docs/Web/SVG/Element/path>
 >- 实例 <https://www.w3cschool.cn/svg/svg-examples.html>
 >- 动画 animation <https://segmentfault.com/a/1190000009371194#articleHeader3>
 >- <rect> 矩形
@@ -9,16 +10,20 @@
 >- <polyline> 折线
 >- <ploygon> 多边形
 >- <path> 路径
->-- <path>
-    M = moveto 移动
-    L = lineto 
-    H = horizontal lineto 水平线
-    V = vertical lineto 垂直线
-    C = curveto 曲线
-    S = smooth curveto 光滑曲线
-    Q = quadratic Bézier curve 贝塞尔曲线
-    T = smooth quadratic Bézier curveto 光滑贝塞尔曲线
-    A = elliptical Arc 圆/椭圆
+>-- <path> path文档<https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/d>
+   
+    M = moveto 移动(x,y) m(x0+x,y0+y)
+    L = lineto 水平line（x,y）
+    H = horizontal lineto 水平线(x) h(x0+dx,y0)
+    V = vertical lineto 垂直线(y) v(x0,y0+dy)
+    C = curveto 曲线(x0,y0 x,y x`,y`) (x0,y0 start x,y end x`,y` 控制点) (c同理)
+    S = smooth curveto 光滑曲线 曲线(x0,y0 x,y x`,y`) (x0,y0 start x,y end x`,y` 控制点) (s同理)
+    [C,S 都是三次贝塞尔曲线，作用四个点]
+    Q = quadratic Bézier curve 贝塞尔曲线(x1,y1,x,y) q(x1+x0,y1+y0,x+x0,y+y0)
+    T = smooth quadratic Bézier curveto 光滑贝塞尔曲线(x,y) t(x1+x0,y1+y0)
+    [Q,T 都是二次贝塞尔曲线 作用三个点]
+    A = elliptical Arc 圆/椭圆(rx,ry angle large-arc-flag sweep-flag x,y)
+    [rx,ry 椭圆x,y angle旋转角度 large-arc-flag 大圆弧或者小圆弧0-1 sweep-flag 1顺时针0逆时针 x,y 结束点]
     Z = closepath 关闭
 >-- <Stroke>
     stroke  颜色
